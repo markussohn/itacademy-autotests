@@ -3,17 +3,18 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+//import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.io.File;
+//import java.io.File;
 
 public class SampleTest {
 
     @Test
     public void testCase() {
-        File file = new File("C:/IEDriverServer.exe");
-        System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
-        WebDriver driver = new InternetExplorerDriver();
+//        File file = new File("C:/IEDriverServer.exe");
+//        System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
+        WebDriver driver = new FirefoxDriver();
         driver.get("https://www.swedbank.lt/lt/spreadsheets/consumer2");
         WebElement firstInput = driver.findElement(By.id("SpreadsheetRequestedLoanAmount"));
         WebElement secondInput = driver.findElement(By.id("SpreadsheetNetMonthlyIncome"));
