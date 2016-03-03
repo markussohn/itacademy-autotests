@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.*;
 
+import java.util.List;
+
 public class BigTest {
 
     @Test
@@ -50,14 +52,20 @@ public class BigTest {
         bank.selectByIndex(2);
         date.click();
         driver.findElement(By.linkText("28")).click();
-        time.selectByVisibleText("14:00");
+        time.selectByVisibleText("15:00");
         subject.selectByIndex(2);
         message.sendKeys("Labas");
         regButton.click();
+
+
 
         Thread.sleep(2000);
 
         driver.navigate().to("http://swedbank-us1bteam.rhcloud.com/#/history");
 
+        Thread.sleep(2000);
+
+        List<WebElement> elements = driver.findElements(By.xpath("//div[@class='col-xs-12']/table/tbody/tr[@class='ng-scope']"));
+        Assert.assertTrue(elements.get(elements.size()-1).getText().contains("2016-03-28"+'\n'+ "15:00:00"+'\n'+ "Antakalnio g. 45"+'\n'+ "Taupymas ir investavimas"));
     }
 }
