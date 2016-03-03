@@ -15,7 +15,9 @@ public class BigTest {
 
         WebDriver driver = new FirefoxDriver();
         driver.get("http://swedbank-us1bteam.rhcloud.com/?email=admin%40admin.lt&password=admin#/");
-        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("buttonLogin")));
 
         WebElement email = driver.findElement(By.id("email"));
         WebElement password = driver.findElement(By.id("password"));
@@ -27,11 +29,11 @@ public class BigTest {
         password.sendKeys("admin");
         loginButton.click();
 
-        Thread.sleep(3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("buttonRegister")));
 
         driver.navigate().to("http://swedbank-us1bteam.rhcloud.com/#/register");
 
-        Thread.sleep(2000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("btn")));
 
         //Register form inputs
         WebElement name = driver.findElement(By.id("name"));
@@ -58,12 +60,10 @@ public class BigTest {
         regButton.click();
 
 
-
-        Thread.sleep(2000);
-
         driver.navigate().to("http://swedbank-us1bteam.rhcloud.com/#/history");
 
         Thread.sleep(2000);
+
 
         List<WebElement> elements = driver.findElements(By.xpath("//div[@class='col-xs-12']/table/tbody/tr[@class='ng-scope']"));
         Assert.assertTrue(elements.get(elements.size()-1).getText().contains("2016-03-28"+'\n'+ "15:00:00"+'\n'+ "Antakalnio g. 45"+'\n'+ "Taupymas ir investavimas"));
