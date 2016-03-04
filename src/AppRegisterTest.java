@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
 
 import java.util.concurrent.TimeUnit;
 
@@ -50,7 +51,24 @@ public class AppRegisterTest {
         login.assertConfirmation("2016-03-28"+'\n'+ "16:00:00"+'\n'+ "Antakalnio g. 45"+'\n'+ "Taupymas ir investavimas");
     }
 
-    @After
+    @Test
+    public void validationTest() throws InterruptedException {
+        login.getRegisterPage();
+        login.waitForRegisterPage();
+        login.enterName("Tester");
+        login.enterSurname("");
+        login.enterPhone("+37061855522");
+        login.enterEmail("tester@demo.net");
+        login.selectBank(2);
+        login.pickDate("28");
+        login.selectTime("16:00");
+        login.selectSubject(2);
+
+        login.clickRegisterButton();
+        login.assertValidation("surname");
+    }
+
+    @AfterClass
     public void tearDown() throws Exception {
         driver.quit();
     }

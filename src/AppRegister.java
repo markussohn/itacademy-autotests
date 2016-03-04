@@ -113,4 +113,8 @@ public class AppRegister {
         Assert.assertTrue(elements.get(elements.size()-1).getText().contains(data));
     }
 
+    public void assertValidation(String id){
+        Assert.assertTrue(driver.findElement(By.id(id)).isEnabled());
+    }
+
 }
