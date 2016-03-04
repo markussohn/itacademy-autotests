@@ -15,6 +15,7 @@ public class BigTest {
 
         WebDriver driver = new FirefoxDriver();
         driver.get("http://swedbank-us1bteam.rhcloud.com/?email=admin%40admin.lt&password=admin#/");
+        driver.manage().window().maximize();
         WebDriverWait wait = new WebDriverWait(driver, 10);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("buttonLogin")));
@@ -54,7 +55,7 @@ public class BigTest {
         bank.selectByIndex(2);
         date.click();
         driver.findElement(By.linkText("28")).click();
-        time.selectByVisibleText("15:00");
+        time.selectByVisibleText("13:00");
         subject.selectByIndex(2);
         message.sendKeys("Labas");
         regButton.click();
@@ -66,6 +67,6 @@ public class BigTest {
 
 
         List<WebElement> elements = driver.findElements(By.xpath("//div[@class='col-xs-12']/table/tbody/tr[@class='ng-scope']"));
-        Assert.assertTrue(elements.get(elements.size()-1).getText().contains("2016-03-28"+'\n'+ "15:00:00"+'\n'+ "Antakalnio g. 45"+'\n'+ "Taupymas ir investavimas"));
+        Assert.assertTrue(elements.get(elements.size()-1).getText().contains("2016-03-28"+'\n'+ "13:00:00"+'\n'+ "Antakalnio g. 45"+'\n'+ "Taupymas ir investavimas"));
     }
 }
